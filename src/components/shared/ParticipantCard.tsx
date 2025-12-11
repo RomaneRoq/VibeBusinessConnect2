@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Heart, Plus, Building2, Rocket, ExternalLink } from 'lucide-react'
+import { Heart, Plus, Building2, Rocket, ExternalLink, Check, ArrowRight } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -37,96 +37,119 @@ export default function ParticipantCard({ participant, showActions = true }: Par
 
   return (
     <Link to={`/participants/${participant.id}`}>
-      <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
-        <CardContent className="p-4">
-          <div className="flex gap-4">
+      <Card className="group card-hover border-0 shadow-md h-full overflow-hidden">
+        <CardContent className="p-0">
+          {/* Header with gradient */}
+          <div className={cn(
+            "p-4 pb-12 relative",
+            participant.type === 'startup'
+              ? "bg-gradient-to-br from-blue-500/10 via-cyan-500/10 to-transparent"
+              : "bg-gradient-to-br from-violet-500/10 via-purple-500/10 to-transparent"
+          )}>
+            <div className="flex items-start justify-between">
+              <Badge
+                variant={participant.type === 'startup' ? 'default' : 'secondary'}
+                className="text-xs"
+              >
+                {participant.type === 'startup' ? (
+                  <Rocket className="h-3 w-3 mr-1" />
+                ) : (
+                  <Building2 className="h-3 w-3 mr-1" />
+                )}
+                {participant.type === 'startup' ? 'Startup' : 'Entreprise'}
+              </Badge>
+
+              {showActions && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={cn(
+                    "h-9 w-9 rounded-full transition-all",
+                    isFavorite
+                      ? "bg-rose-100 text-rose-500 hover:bg-rose-200"
+                      : "bg-white/80 hover:bg-white"
+                  )}
+                  onClick={handleFavorite}
+                >
+                  <Heart
+                    className={cn(
+                      'h-4 w-4 transition-all',
+                      isFavorite && 'fill-rose-500 text-rose-500 scale-110'
+                    )}
+                  />
+                </Button>
+              )}
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="px-4 pb-4 -mt-8 relative">
             {/* Logo */}
-            <div className="shrink-0">
+            <div className="mb-3">
               <img
-                src={participant.logo || `https://api.dicebear.com/7.x/initials/svg?seed=${participant.name}&backgroundColor=1E3A5F`}
+                src={participant.logo || `https://api.dicebear.com/7.x/initials/svg?seed=${participant.name}&backgroundColor=2563eb`}
                 alt={participant.name}
-                className="w-16 h-16 rounded-lg object-cover"
+                className="w-16 h-16 rounded-2xl object-cover border-4 border-white shadow-lg"
               />
             </div>
 
-            {/* Content */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-start justify-between gap-2">
-                <div className="min-w-0">
-                  <h3 className="font-semibold text-sm truncate">{participant.name}</h3>
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
-                    {participant.type === 'startup' ? (
-                      <Rocket className="h-3 w-3" />
-                    ) : (
-                      <Building2 className="h-3 w-3" />
-                    )}
-                    <span className="capitalize">
-                      {participant.type === 'startup' ? 'Startup' : 'Entreprise'}
-                    </span>
-                  </div>
-                </div>
+            {/* Name & Sector */}
+            <h3 className="font-bold text-base mb-1 group-hover:text-primary transition-colors">
+              {participant.name}
+            </h3>
+            <Badge variant="ghost" className="mb-3 text-xs px-0 hover:bg-transparent">
+              {SECTOR_LABELS[participant.sector]}
+            </Badge>
 
-                {showActions && (
-                  <div className="flex gap-1 shrink-0">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8"
-                      onClick={handleFavorite}
-                    >
-                      <Heart
-                        className={cn(
-                          'h-4 w-4',
-                          isFavorite && 'fill-destructive text-destructive'
-                        )}
-                      />
-                    </Button>
-                  </div>
+            {/* Pitch */}
+            <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+              {participant.pitch}
+            </p>
+
+            {/* Actions */}
+            {showActions && (
+              <div className="flex items-center gap-2">
+                <Button
+                  variant={isPreferred ? 'default' : 'outline'}
+                  size="sm"
+                  className={cn(
+                    "flex-1 h-9 text-xs font-medium",
+                    isPreferred && "bg-emerald-500 hover:bg-emerald-600"
+                  )}
+                  onClick={handleAddPreference}
+                  disabled={isPreferred || !canAddMore()}
+                >
+                  {isPreferred ? (
+                    <>
+                      <Check className="h-3.5 w-3.5 mr-1.5" />
+                      Ajouté aux préférences
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="h-3.5 w-3.5 mr-1.5" />
+                      Ajouter aux préférences
+                    </>
+                  )}
+                </Button>
+
+                {participant.website && (
+                  <a
+                    href={participant.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="h-9 w-9 flex items-center justify-center rounded-xl border-2 border-input hover:border-primary/30 hover:bg-accent transition-all"
+                  >
+                    <ExternalLink className="h-4 w-4 text-muted-foreground" />
+                  </a>
                 )}
               </div>
+            )}
 
-              <Badge variant="secondary" className="mt-2 text-xs">
-                {SECTOR_LABELS[participant.sector]}
-              </Badge>
-
-              <p className="text-xs text-muted-foreground mt-2 line-clamp-2">
-                {participant.pitch}
-              </p>
-
-              {/* Actions */}
-              {showActions && (
-                <div className="flex items-center gap-2 mt-3">
-                  <Button
-                    variant={isPreferred ? 'default' : 'outline'}
-                    size="sm"
-                    className="h-7 text-xs"
-                    onClick={handleAddPreference}
-                    disabled={isPreferred || !canAddMore()}
-                  >
-                    {isPreferred ? (
-                      'Ajouté'
-                    ) : (
-                      <>
-                        <Plus className="h-3 w-3 mr-1" />
-                        Préférence
-                      </>
-                    )}
-                  </Button>
-
-                  {participant.website && (
-                    <a
-                      href={participant.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="text-xs text-muted-foreground hover:text-primary flex items-center gap-1"
-                    >
-                      <ExternalLink className="h-3 w-3" />
-                      Site web
-                    </a>
-                  )}
-                </div>
-              )}
+            {/* View profile hint */}
+            <div className="flex items-center justify-center gap-1 mt-3 text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+              <span>Voir le profil</span>
+              <ArrowRight className="h-3 w-3" />
             </div>
           </div>
         </CardContent>

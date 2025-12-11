@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Download, Calendar, Clock, MapPin, User } from 'lucide-react'
+import { Download, Calendar, Clock, MapPin, User, CalendarDays, Coffee, ArrowRight } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -19,48 +19,63 @@ function TimeSlotCard({ slot, onSelect }: { slot: TimeSlot; onSelect: (meeting: 
   return (
     <div
       className={cn(
-        'border rounded-lg p-4 transition-colors',
-        isBreak && 'bg-muted border-muted',
-        isMeeting && 'bg-white hover:shadow-md cursor-pointer',
-        isFree && 'bg-gray-50 border-dashed'
+        'relative rounded-2xl p-4 transition-all duration-300',
+        isBreak && 'bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20',
+        isMeeting && 'bg-white border-0 shadow-md hover:shadow-xl hover:-translate-y-0.5 cursor-pointer',
+        isFree && 'bg-muted/50 border border-dashed border-muted-foreground/20'
       )}
       onClick={() => isMeeting && slot.meeting && onSelect(slot.meeting)}
     >
-      <div className="flex items-start gap-4">
-        <div className="text-center min-w-[60px]">
-          <p className="font-semibold">{slot.startTime}</p>
+      {/* Time indicator line */}
+      <div className={cn(
+        "absolute left-0 top-4 bottom-4 w-1 rounded-full",
+        isBreak && "bg-gradient-to-b from-amber-500 to-orange-500",
+        isMeeting && "bg-gradient-to-b from-primary to-secondary",
+        isFree && "bg-muted-foreground/30"
+      )} />
+
+      <div className="flex items-start gap-4 pl-4">
+        <div className="text-center min-w-[70px]">
+          <p className="font-bold text-lg">{slot.startTime}</p>
           <p className="text-xs text-muted-foreground">{slot.endTime}</p>
         </div>
 
         {isBreak && (
-          <div className="flex-1">
-            <p className="font-medium text-muted-foreground">{slot.label}</p>
+          <div className="flex-1 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-md">
+              <Coffee className="h-5 w-5 text-white" />
+            </div>
+            <div>
+              <p className="font-semibold">{slot.label}</p>
+              <p className="text-sm text-muted-foreground">Pause & Networking</p>
+            </div>
           </div>
         )}
 
         {isMeeting && slot.meeting && (
           <div className="flex-1">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <img
-                src={slot.meeting.participant.logo || `https://api.dicebear.com/7.x/initials/svg?seed=${slot.meeting.participant.name}&backgroundColor=1E3A5F`}
+                src={slot.meeting.participant.logo || `https://api.dicebear.com/7.x/initials/svg?seed=${slot.meeting.participant.name}&backgroundColor=2563eb`}
                 alt={slot.meeting.participant.name}
-                className="w-10 h-10 rounded-lg"
+                className="w-12 h-12 rounded-xl shadow-md"
               />
-              <div>
-                <h3 className="font-medium">{slot.meeting.participant.name}</h3>
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <div className="flex-1">
+                <h3 className="font-semibold">{slot.meeting.participant.name}</h3>
+                <div className="flex items-center gap-2 mt-1">
                   <Badge variant="secondary" className="text-xs">
                     {SECTOR_LABELS[slot.meeting.participant.sector]}
                   </Badge>
-                  <span>{slot.meeting.table}</span>
+                  <span className="text-xs text-muted-foreground">{slot.meeting.table}</span>
                 </div>
               </div>
+              <ArrowRight className="h-5 w-5 text-muted-foreground" />
             </div>
           </div>
         )}
 
         {isFree && (
-          <div className="flex-1">
+          <div className="flex-1 flex items-center">
             <p className="text-muted-foreground text-sm">Créneau libre</p>
           </div>
         )}
@@ -89,57 +104,67 @@ export default function Agenda() {
   const meetingCount = timeSlots.filter(s => s.type === 'meeting').length
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fade-in">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Mon agenda</h1>
+          <div className="flex items-center gap-2 mb-1">
+            <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center shadow-lg shadow-primary/25">
+              <CalendarDays className="h-5 w-5 text-white" />
+            </div>
+            <h1 className="text-2xl font-bold">Mon agenda</h1>
+          </div>
           <p className="text-muted-foreground">
             {meetingCount} rendez-vous prévus le {new Date(eventInfo.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}
           </p>
         </div>
-        <Button onClick={handleExport}>
+        <Button onClick={handleExport} className="shine">
           <Download className="h-4 w-4 mr-2" />
           Exporter (.ics)
         </Button>
       </div>
 
       {/* Event info */}
-      <Card>
-        <CardContent className="p-4">
+      <Card className="border-0 shadow-md overflow-hidden">
+        <div className="h-1 gradient-primary" />
+        <CardContent className="p-5">
           <div className="flex flex-wrap gap-4 text-sm">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5">
               <Calendar className="h-4 w-4 text-primary" />
-              <span>{new Date(eventInfo.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
+              <span className="font-medium">{new Date(eventInfo.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5">
               <Clock className="h-4 w-4 text-primary" />
-              <span>{eventInfo.startTime} - {eventInfo.endTime}</span>
+              <span className="font-medium">{eventInfo.startTime} - {eventInfo.endTime}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5">
               <MapPin className="h-4 w-4 text-primary" />
-              <span>{eventInfo.location.name}</span>
+              <span className="font-medium">{eventInfo.location.name}</span>
             </div>
           </div>
         </CardContent>
       </Card>
 
       {/* Timeline */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Programme du jour</CardTitle>
+      <Card className="border-0 shadow-lg">
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center gap-2">
+            <Clock className="h-5 w-5 text-primary" />
+            Programme du jour
+          </CardTitle>
           <CardDescription>
             Cliquez sur un rendez-vous pour voir les détails
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-2">
-            {timeSlots.map((slot) => (
-              <TimeSlotCard
-                key={slot.id}
-                slot={slot}
-                onSelect={setSelectedMeeting}
-              />
+          <div className="space-y-3">
+            {timeSlots.map((slot, index) => (
+              <div key={slot.id} className={`animate-fade-in delay-${Math.min(index * 50, 500)}`}>
+                <TimeSlotCard
+                  slot={slot}
+                  onSelect={setSelectedMeeting}
+                />
+              </div>
             ))}
           </div>
         </CardContent>
@@ -147,26 +172,28 @@ export default function Agenda() {
 
       {/* Meeting detail dialog */}
       <Dialog open={!!selectedMeeting} onOpenChange={() => setSelectedMeeting(null)}>
-        <DialogContent>
+        <DialogContent className="rounded-2xl">
           {selectedMeeting && (
             <>
               <DialogHeader>
                 <DialogTitle>Détails du rendez-vous</DialogTitle>
                 <DialogDescription>
-                  {selectedMeeting.startTime} - {selectedMeeting.endTime}
+                  <Badge variant="secondary" className="mt-2">
+                    {selectedMeeting.startTime} - {selectedMeeting.endTime}
+                  </Badge>
                 </DialogDescription>
               </DialogHeader>
 
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
+              <div className="space-y-5">
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-muted/50">
                   <img
-                    src={selectedMeeting.participant.logo || `https://api.dicebear.com/7.x/initials/svg?seed=${selectedMeeting.participant.name}&backgroundColor=1E3A5F`}
+                    src={selectedMeeting.participant.logo || `https://api.dicebear.com/7.x/initials/svg?seed=${selectedMeeting.participant.name}&backgroundColor=2563eb`}
                     alt={selectedMeeting.participant.name}
-                    className="w-16 h-16 rounded-lg"
+                    className="w-16 h-16 rounded-2xl shadow-lg"
                   />
                   <div>
-                    <h3 className="font-semibold text-lg">{selectedMeeting.participant.name}</h3>
-                    <Badge variant="secondary">
+                    <h3 className="font-bold text-lg">{selectedMeeting.participant.name}</h3>
+                    <Badge variant="secondary" className="mt-1">
                       {SECTOR_LABELS[selectedMeeting.participant.sector]}
                     </Badge>
                   </div>
@@ -176,21 +203,20 @@ export default function Agenda() {
                   {selectedMeeting.participant.pitch}
                 </p>
 
-                <div className="flex items-center gap-2 text-sm">
-                  <MapPin className="h-4 w-4 text-muted-foreground" />
-                  <span>{selectedMeeting.table}</span>
+                <div className="flex items-center gap-2 p-3 rounded-xl bg-primary/5">
+                  <MapPin className="h-5 w-5 text-primary" />
+                  <span className="font-medium">{selectedMeeting.table}</span>
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                   <Link to={`/participants/${selectedMeeting.participantId}`} className="flex-1">
-                    <Button variant="outline" className="w-full">
+                    <Button variant="outline" className="w-full h-11">
                       <User className="h-4 w-4 mr-2" />
                       Voir le profil
                     </Button>
                   </Link>
                   <Button
-                    variant="default"
-                    className="flex-1"
+                    className="flex-1 h-11"
                     onClick={() => setSelectedMeeting(null)}
                   >
                     Fermer

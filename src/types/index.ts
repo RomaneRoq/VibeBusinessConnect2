@@ -47,6 +47,7 @@ export interface Participant {
   fundingRaised?: string
   teamSize?: number
   foundedYear?: number
+  isVillageNetwork?: boolean
 
   // Enterprise specific
   employeeCount?: string

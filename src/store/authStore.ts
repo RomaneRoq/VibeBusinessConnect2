@@ -21,6 +21,7 @@ export interface RegisterData {
   type: ParticipantType
   name: string
   sector: Sector
+  isVillageNetwork?: boolean
 }
 
 export interface OnboardingData {
@@ -65,6 +66,7 @@ const createDemoUser = (data: RegisterData): User => {
       email: data.email,
       lookingFor: [],
       thematicsInterest: [],
+      isVillageNetwork: data.isVillageNetwork,
       createdAt: new Date().toISOString()
     },
     onboardingCompleted: false,

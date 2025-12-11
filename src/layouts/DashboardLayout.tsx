@@ -6,16 +6,18 @@ import ChatBot from '@/components/shared/ChatBot'
 
 export default function DashboardLayout() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Sidebar - Desktop */}
       <Sidebar />
 
       {/* Main content */}
-      <div className="lg:pl-64">
+      <div className="lg:pl-72">
         <Header />
 
-        <main className="p-4 lg:p-6 pb-20 lg:pb-6">
-          <Outlet />
+        <main className="p-4 lg:p-8 pb-24 lg:pb-8">
+          <div className="max-w-7xl mx-auto">
+            <Outlet />
+          </div>
         </main>
       </div>
 

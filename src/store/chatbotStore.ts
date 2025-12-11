@@ -27,7 +27,7 @@ const welcomeMessage: ChatMessage = {
   timestamp: new Date()
 }
 
-export const useChatbotStore = create<ChatbotState>()((set, get) => ({
+export const useChatbotStore = create<ChatbotState>()((set) => ({
   isOpen: false,
   messages: [welcomeMessage],
 

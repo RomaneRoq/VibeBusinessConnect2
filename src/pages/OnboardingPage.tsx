@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Loader2, Check, Upload, ArrowRight, ArrowLeft } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Check, ArrowRight, ArrowLeft } from 'lucide-react'
+import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -21,7 +21,7 @@ const steps = [
 
 export default function OnboardingPage() {
   const navigate = useNavigate()
-  const { user, updateProfile, completeOnboarding, isLoading } = useAuthStore()
+  const { user, updateProfile, completeOnboarding } = useAuthStore()
   const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState({
     pitch: user?.participant.pitch || '',
