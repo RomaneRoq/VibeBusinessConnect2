@@ -28,7 +28,7 @@ export const useAgendaStore = create<AgendaState>()((set, get) => ({
 
   exportToICS: () => {
     const { meetings } = get()
-    const eventDate = '2025-02-15'
+    const eventDate = '2025-02-25'
 
     let icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
@@ -47,7 +47,7 @@ DTSTART:${startDateTime}
 DTEND:${endDateTime}
 SUMMARY:RDV avec ${meeting.participant.name}
 DESCRIPTION:Speed-meeting avec ${meeting.participant.name} - ${meeting.participant.pitch}
-LOCATION:${meeting.table} - Le Village by CA Luxembourg
+LOCATION:${meeting.table} - House of Startups
 STATUS:CONFIRMED
 UID:${meeting.id}@businessconnect.lu
 END:VEVENT

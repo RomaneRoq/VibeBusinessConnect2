@@ -23,7 +23,7 @@ export const usePreferencesStore = create<PreferencesState>()(
     (set, get) => ({
       preferences: [],
       maxPreferences: 10,
-      deadline: '2025-02-14T18:00:00Z',
+      deadline: '2025-02-24T18:00:00Z',
       isSubmitted: false,
 
       addPreference: (participantId: string) => {

@@ -2,18 +2,18 @@ import type { EventInfo, ProgramItem } from '@/types'
 
 export const eventInfo: EventInfo = {
   id: 'event-fintech-2025',
-  name: 'Fintech & Regtech Connect 2025',
-  date: '2025-02-15',
-  startTime: '09:00',
-  endTime: '18:00',
+  name: 'Business Connect Fintech & Regtech 2025',
+  date: '2025-02-25',
+  startTime: '10:00',
+  endTime: '17:00',
   location: {
-    name: 'Le Village by CA Luxembourg',
-    address: '39 Rue du Puits Romain',
+    name: 'House of Startups',
+    address: '9 Rue du Laboratoire',
     city: 'Luxembourg',
     country: 'Luxembourg',
     coordinates: {
-      lat: 49.6116,
-      lng: 6.1319
+      lat: 49.6117,
+      lng: 6.1296
     }
   },
   description: 'Une journée de rencontres B2B dédiée à l\'innovation financière. Connectez-vous avec les acteurs clés de l\'écosystème Fintech & Regtech luxembourgeois lors de speed-meetings de 15 minutes.',
@@ -23,33 +23,33 @@ export const eventInfo: EventInfo = {
     email: 'events@village-ca.lu',
     phone: '+352 26 27 28 29'
   },
-  parking: 'Parking souterrain disponible - entrée rue du Puits Romain. Places réservées aux participants sur présentation du badge.',
-  access: 'Bus : lignes 4, 16, 18 - arrêt "Kirchberg Centre". Tram : ligne 1 - arrêt "Rout Bréck - Pafendall". En voiture : suivre direction Kirchberg, puis GPS.'
+  parking: 'Parking public Knuedler à proximité (5 min à pied). Parking Monterey également disponible.',
+  access: 'Bus : lignes 2, 3, 4 - arrêt "Hamilius". Tram : ligne 1 - arrêt "Hamilius". En voiture : suivre direction Centre-Ville, puis GPS vers Rue du Laboratoire.'
 }
 
 export const programItems: ProgramItem[] = [
   {
     id: 'prog-1',
-    startTime: '09:00',
-    endTime: '09:30',
-    title: 'Accueil et petit-déjeuner',
-    description: 'Café, viennoiseries et networking informel. Récupérez votre badge à l\'accueil.',
+    startTime: '10:00',
+    endTime: '10:15',
+    title: 'Accueil café',
+    description: 'Café et networking informel. Récupérez votre badge à l\'accueil.',
     type: 'networking',
     location: 'Hall d\'entrée'
   },
   {
     id: 'prog-2',
-    startTime: '09:30',
-    endTime: '10:00',
-    title: 'Keynote d\'ouverture',
-    description: 'L\'avenir de la finance au Luxembourg : défis et opportunités pour 2025',
+    startTime: '10:15',
+    endTime: '10:30',
+    title: 'Mot de bienvenue',
+    description: 'Introduction à la journée et présentation du programme',
     type: 'keynote',
-    speaker: 'Marc Baertz, Directeur Le Village by CA',
-    location: 'Auditorium'
+    speaker: 'Village by CA Luxembourg',
+    location: 'Salle principale'
   },
   {
     id: 'prog-3',
-    startTime: '10:00',
+    startTime: '10:30',
     endTime: '12:30',
     title: 'Session de Speed-Meetings #1',
     description: 'Première session de rencontres B2B. Consultez votre agenda pour connaître vos rendez-vous.',
@@ -59,49 +59,38 @@ export const programItems: ProgramItem[] = [
   {
     id: 'prog-4',
     startTime: '12:30',
-    endTime: '14:00',
-    title: 'Déjeuner networking',
-    description: 'Buffet déjeunatoire et networking libre. Continuez vos discussions dans un cadre décontracté.',
+    endTime: '13:30',
+    title: 'Pause déjeuner',
+    description: 'Buffet déjeunatoire et networking libre.',
     type: 'break',
-    location: 'Restaurant Le Village'
+    location: 'Espace restauration'
   },
   {
     id: 'prog-5',
-    startTime: '14:00',
-    endTime: '14:30',
-    title: 'Table ronde : RegTech & Conformité',
-    description: 'Comment les nouvelles technologies transforment la conformité réglementaire ?',
-    type: 'keynote',
-    speaker: 'Panel d\'experts CSSF & KPMG',
-    location: 'Auditorium'
-  },
-  {
-    id: 'prog-6',
-    startTime: '14:30',
-    endTime: '17:00',
+    startTime: '13:30',
+    endTime: '15:30',
     title: 'Session de Speed-Meetings #2',
     description: 'Deuxième session de rencontres B2B. Consultez votre agenda pour connaître vos rendez-vous.',
     type: 'speed_meeting',
     location: 'Espace Speed-Meeting'
   },
   {
-    id: 'prog-7',
-    startTime: '17:00',
-    endTime: '17:30',
-    title: 'Keynote de clôture',
-    description: 'Retour sur la journée et perspectives pour l\'écosystème Fintech luxembourgeois.',
-    type: 'keynote',
-    speaker: 'Nasir Zubairi, CEO LHoFT',
-    location: 'Auditorium'
+    id: 'prog-6',
+    startTime: '15:30',
+    endTime: '15:45',
+    title: 'Pause café',
+    description: 'Pause et networking.',
+    type: 'break',
+    location: 'Espace café'
   },
   {
-    id: 'prog-8',
-    startTime: '17:30',
-    endTime: '19:00',
-    title: 'Cocktail networking',
-    description: 'Cocktail de clôture et networking libre. L\'occasion de conclure vos discussions de la journée.',
-    type: 'networking',
-    location: 'Terrasse panoramique'
+    id: 'prog-7',
+    startTime: '15:45',
+    endTime: '17:00',
+    title: 'Session de Speed-Meetings #3',
+    description: 'Dernière session de rencontres B2B.',
+    type: 'speed_meeting',
+    location: 'Espace Speed-Meeting'
   }
 ]
 
