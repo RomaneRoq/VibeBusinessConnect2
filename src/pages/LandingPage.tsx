@@ -3,7 +3,6 @@ import { Calendar, MapPin, Users, Clock, ArrowRight, Sparkles, ChevronRight, Sta
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { eventInfo } from '@/data/event'
-import { participants } from '@/data/participants'
 
 export default function LandingPage() {
   return (
@@ -144,65 +143,82 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            <div>
-              <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
-                <Star className="h-4 w-4 mr-2" />
-                Fonctionnalités
-              </Badge>
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-                Tout ce qu'il vous faut pour <span className="text-gradient">réussir vos rencontres</span>
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                Notre plateforme vous accompagne avant, pendant et après l'événement pour maximiser chaque opportunité de networking.
-              </p>
+      <section className="py-24 relative overflow-hidden">
+        {/* Background decorations */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
-              <div className="space-y-4">
-                {[
-                  { title: 'Profils détaillés', desc: 'Découvrez les startups et entreprises avec leurs pitchs et objectifs' },
-                  { title: 'Matching intelligent', desc: 'Indiquez vos préférences, nous optimisons votre planning' },
-                  { title: 'Messagerie intégrée', desc: 'Échangez avec les participants avant l\'événement' },
-                  { title: 'Agenda personnalisé', desc: 'Visualisez et exportez vos rendez-vous facilement' },
-                ].map((feature, index) => (
-                  <div key={feature.title} className={`flex gap-4 p-4 rounded-xl bg-muted/50 animate-fade-in delay-${index * 100}`}>
-                    <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center flex-shrink-0">
-                      <ChevronRight className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">{feature.title}</h4>
-                      <p className="text-sm text-muted-foreground">{feature.desc}</p>
-                    </div>
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Section header */}
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20 px-4 py-2">
+              <Star className="h-4 w-4 mr-2" />
+              Fonctionnalités
+            </Badge>
+            <h2 className="text-3xl lg:text-5xl font-bold mb-6">
+              Tout ce qu'il vous faut pour<br />
+              <span className="text-gradient">réussir vos rencontres</span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              Notre plateforme vous accompagne avant, pendant et après l'événement pour maximiser chaque opportunité de networking.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
+            {/* Features list */}
+            <div className="space-y-6">
+              {[
+                { title: 'Profils détaillés', desc: 'Découvrez les startups et entreprises avec leurs pitchs et objectifs', icon: Users, color: 'from-blue-500 to-blue-600' },
+                { title: 'Matching intelligent', desc: 'Indiquez vos préférences, nous optimisons votre planning', icon: Target, color: 'from-purple-500 to-purple-600' },
+                { title: 'Messagerie intégrée', desc: 'Échangez avec les participants avant l\'événement', icon: Zap, color: 'from-orange-500 to-orange-600' },
+                { title: 'Agenda personnalisé', desc: 'Visualisez et exportez vos rendez-vous facilement', icon: Calendar, color: 'from-green-500 to-green-600' },
+              ].map((feature) => (
+                <div
+                  key={feature.title}
+                  className="group flex gap-5 p-5 rounded-2xl bg-white/80 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+                >
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    <feature.icon className="h-7 w-7 text-white" />
                   </div>
-                ))}
-              </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-2">{feature.title}</h4>
+                    <p className="text-muted-foreground">{feature.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
 
+            {/* Sectors card */}
             <div className="relative">
-              <div className="absolute inset-0 gradient-primary rounded-3xl blur-3xl opacity-20" />
-              <div className="relative glass rounded-3xl p-8 shadow-2xl">
-                <div className="space-y-4">
-                  {participants.slice(0, 4).map((p, index) => (
-                    <div key={p.id} className={`flex items-center gap-4 p-3 rounded-xl bg-white/50 animate-slide-in-right delay-${index * 100}`}>
-                      <img
-                        src={p.logo || `https://api.dicebear.com/7.x/initials/svg?seed=${p.name}&backgroundColor=1E3A5F`}
-                        alt={p.name}
-                        className="w-12 h-12 rounded-xl"
-                      />
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium truncate">{p.name}</p>
-                        <p className="text-sm text-muted-foreground truncate">{p.pitch}</p>
-                      </div>
-                      <Badge variant={p.type === 'startup' ? 'default' : 'secondary'} className="text-xs">
-                        {p.type === 'startup' ? 'Startup' : 'Entreprise'}
-                      </Badge>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-2xl" />
+              <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/50">
+                <div className="text-center mb-8">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <Sparkles className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">Secteurs représentés</h3>
+                  <p className="text-muted-foreground text-sm">Les thématiques de l'événement</p>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { name: 'Fintech', icon: '💳', color: 'bg-blue-50 dark:bg-blue-900/30 border-blue-200 dark:border-blue-800' },
+                    { name: 'Regtech', icon: '📋', color: 'bg-purple-50 dark:bg-purple-900/30 border-purple-200 dark:border-purple-800' },
+                    { name: 'IA & ML', icon: '🤖', color: 'bg-green-50 dark:bg-green-900/30 border-green-200 dark:border-green-800' },
+                    { name: 'Insurtech', icon: '🛡️', color: 'bg-orange-50 dark:bg-orange-900/30 border-orange-200 dark:border-orange-800' },
+                    { name: 'Blockchain', icon: '🔗', color: 'bg-cyan-50 dark:bg-cyan-900/30 border-cyan-200 dark:border-cyan-800' },
+                    { name: 'Cybersécurité', icon: '🔒', color: 'bg-red-50 dark:bg-red-900/30 border-red-200 dark:border-red-800' },
+                    { name: 'Paiements', icon: '💸', color: 'bg-emerald-50 dark:bg-emerald-900/30 border-emerald-200 dark:border-emerald-800' },
+                    { name: 'Conformité', icon: '✅', color: 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-200 dark:border-indigo-800' },
+                  ].map((sector) => (
+                    <div
+                      key={sector.name}
+                      className={`flex items-center gap-3 p-4 rounded-xl ${sector.color} border hover:scale-105 transition-transform duration-200 cursor-default`}
+                    >
+                      <span className="text-2xl">{sector.icon}</span>
+                      <span className="font-semibold text-sm">{sector.name}</span>
                     </div>
                   ))}
                 </div>
-                <p className="text-center text-sm text-muted-foreground mt-4">
-                  Et {participants.length - 4} autres participants...
-                </p>
               </div>
             </div>
           </div>

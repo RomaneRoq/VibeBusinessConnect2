@@ -30,6 +30,7 @@ export default function OnboardingPage() {
     linkedIn: user?.participant.linkedIn || '',
     stage: user?.participant.stage || 'seed' as StartupStage,
     teamSize: user?.participant.teamSize || 5,
+    annualRevenue: user?.participant.annualRevenue || '',
     fundingRaised: user?.participant.fundingRaised || '',
     employeeCount: user?.participant.employeeCount || '50-100',
     innovationBudget: user?.participant.innovationBudget || '',
@@ -233,6 +234,17 @@ export default function OnboardingPage() {
                         />
                       </div>
                       <div className="space-y-2">
+                        <Label htmlFor="annualRevenue">Chiffre d'affaires</Label>
+                        <Input
+                          id="annualRevenue"
+                          placeholder="Ex: 200K€"
+                          value={formData.annualRevenue}
+                          onChange={(e) => setFormData({ ...formData, annualRevenue: e.target.value })}
+                        />
+                      </div>
+                    </div>
+                    {formData.stage !== 'bootstrap' && (
+                      <div className="space-y-2">
                         <Label htmlFor="fundingRaised">Fonds levés</Label>
                         <Input
                           id="fundingRaised"
@@ -241,7 +253,7 @@ export default function OnboardingPage() {
                           onChange={(e) => setFormData({ ...formData, fundingRaised: e.target.value })}
                         />
                       </div>
-                    </div>
+                    )}
                   </>
                 ) : (
                   <>

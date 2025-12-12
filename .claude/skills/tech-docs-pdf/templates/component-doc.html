@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{PROJECT_NAME}} - Documentation des Composants</title>
+  <style>{{BASE_STYLES}}</style>
+</head>
+<body>
+  <!-- Cover Page -->
+  <div class="cover-page">
+    <h1>{{PROJECT_NAME}}</h1>
+    <div class="subtitle">Documentation des Composants</div>
+    <div class="meta">Genere le {{DATE}}</div>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h2>Table des matieres</h2>
+    {{TOC_ITEMS}}
+  </div>
+
+  <!-- Overview Section -->
+  <div class="section" id="overview">
+    <h1>Vue d'ensemble</h1>
+    <p>Cette documentation decrit les composants React utilises dans le projet {{PROJECT_NAME}}.</p>
+
+    <h2>Structure des composants</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Categorie</th>
+          <th>Description</th>
+          <th>Emplacement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>UI Components</strong></td>
+          <td>Composants de base (Shadcn/ui)</td>
+          <td><code>/src/components/ui/</code></td>
+        </tr>
+        <tr>
+          <td><strong>Shared Components</strong></td>
+          <td>Composants metier reutilisables</td>
+          <td><code>/src/components/shared/</code></td>
+        </tr>
+        <tr>
+          <td><strong>Layout Components</strong></td>
+          <td>Composants de mise en page</td>
+          <td><code>/src/components/layout/</code></td>
+        </tr>
+        <tr>
+          <td><strong>Pages</strong></td>
+          <td>Composants de pages</td>
+          <td><code>/src/pages/</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- UI Components Section -->
+  <div class="section page-break" id="ui-components">
+    <h1>Composants UI</h1>
+    <p>Composants de base construits avec Shadcn/ui et Radix UI. Ces composants fournissent les elements d'interface fondamentaux.</p>
+
+    {{UI_COMPONENTS}}
+  </div>
+
+  <!-- Shared Components Section -->
+  <div class="section page-break" id="shared-components">
+    <h1>Composants Partages</h1>
+    <p>Composants metier reutilisables a travers l'application.</p>
+
+    {{SHARED_COMPONENTS}}
+  </div>
+
+  <!-- Layout Components Section -->
+  <div class="section page-break" id="layout-components">
+    <h1>Composants Layout</h1>
+    <p>Composants de mise en page et navigation.</p>
+
+    {{LAYOUT_COMPONENTS}}
+  </div>
+
+  <!-- Page Components Section -->
+  <div class="section page-break" id="page-components">
+    <h1>Pages</h1>
+    <p>Composants de pages correspondant aux routes de l'application.</p>
+
+    {{PAGE_COMPONENTS}}
+  </div>
+
+</body>
+</html>

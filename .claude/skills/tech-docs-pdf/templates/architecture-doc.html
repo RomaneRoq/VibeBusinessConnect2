@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{PROJECT_NAME}} - Documentation d'Architecture</title>
+  <style>{{BASE_STYLES}}</style>
+</head>
+<body>
+  <!-- Cover Page -->
+  <div class="cover-page">
+    <h1>{{PROJECT_NAME}}</h1>
+    <div class="subtitle">Documentation d'Architecture</div>
+    <div class="meta">Genere le {{DATE}}</div>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h2>Table des matieres</h2>
+    {{TOC_ITEMS}}
+  </div>
+
+  <!-- Overview Section -->
+  <div class="section" id="overview">
+    <h1>Vue d'ensemble</h1>
+    <p>{{PROJECT_NAME}} est une application web moderne construite avec React et TypeScript.</p>
+
+    <h2>Description du projet</h2>
+    <p>{{PROJECT_DESCRIPTION}}</p>
+  </div>
+
+  <!-- Tech Stack Section -->
+  <div class="section page-break" id="tech-stack">
+    <h1>Stack Technique</h1>
+
+    <h2>Frontend</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Categorie</th>
+          <th>Technologie</th>
+          <th>Version</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Framework</td>
+          <td>React</td>
+          <td>18.x</td>
+        </tr>
+        <tr>
+          <td>Langage</td>
+          <td>TypeScript</td>
+          <td>5.x</td>
+        </tr>
+        <tr>
+          <td>Build Tool</td>
+          <td>Vite</td>
+          <td>5.x</td>
+        </tr>
+        <tr>
+          <td>Styling</td>
+          <td>TailwindCSS</td>
+          <td>3.x</td>
+        </tr>
+        <tr>
+          <td>UI Components</td>
+          <td>Shadcn/ui (Radix UI)</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>State Management</td>
+          <td>Zustand</td>
+          <td>5.x</td>
+        </tr>
+        <tr>
+          <td>Routing</td>
+          <td>React Router</td>
+          <td>6.x</td>
+        </tr>
+        <tr>
+          <td>Icons</td>
+          <td>Lucide React</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Drag & Drop</td>
+          <td>@dnd-kit</td>
+          <td>6.x</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Directory Structure Section -->
+  <div class="section page-break" id="directory-structure">
+    <h1>Structure des Dossiers</h1>
+
+    <pre><code>{{PROJECT_NAME}}/
+├── public/                 # Assets statiques
+├── src/
+│   ├── components/
+│   │   ├── ui/            # Composants Shadcn/ui
+│   │   ├── shared/        # Composants metier reutilisables
+│   │   └── layout/        # Composants de layout
+│   ├── pages/             # Pages de l'application
+│   ├── layouts/           # Layouts partages
+│   ├── store/             # Stores Zustand
+│   ├── hooks/             # Custom hooks
+│   ├── types/             # Types TypeScript
+│   ├── data/              # Donnees mockees
+│   ├── lib/               # Utilitaires
+│   ├── App.tsx            # Composant racine
+│   ├── main.tsx           # Point d'entree
+│   └── index.css          # Styles globaux
+├── package.json
+├── tsconfig.json
+├── tailwind.config.js
+└── vite.config.ts</code></pre>
+
+    <h2>Description des dossiers</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Dossier</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>components/ui/</code></td>
+          <td>Composants UI de base (Button, Card, Dialog, etc.)</td>
+        </tr>
+        <tr>
+          <td><code>components/shared/</code></td>
+          <td>Composants metier reutilisables (ParticipantCard, ChatBot)</td>
+        </tr>
+        <tr>
+          <td><code>components/layout/</code></td>
+          <td>Composants de navigation (Sidebar, Header, BottomNav)</td>
+        </tr>
+        <tr>
+          <td><code>pages/</code></td>
+          <td>Composants de pages correspondant aux routes</td>
+        </tr>
+        <tr>
+          <td><code>store/</code></td>
+          <td>Stores Zustand avec persistance localStorage</td>
+        </tr>
+        <tr>
+          <td><code>types/</code></td>
+          <td>Definitions TypeScript centralisees</td>
+        </tr>
+        <tr>
+          <td><code>data/</code></td>
+          <td>Donnees mockees pour le MVP</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Routing Section -->
+  <div class="section page-break" id="routing">
+    <h1>Routage</h1>
+
+    <h2>Structure des routes</h2>
+    <p>L'application utilise React Router v6 avec des routes protegees.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Route</th>
+          <th>Page</th>
+          <th>Protection</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ROUTES}}
+      </tbody>
+    </table>
+
+    <h2>Guards de route</h2>
+    <ul>
+      <li><strong>ProtectedRoute</strong> - Verifie l'authentification</li>
+      <li><strong>PublicRoute</strong> - Redirige si deja authentifie</li>
+    </ul>
+  </div>
+
+  <!-- State Management Section -->
+  <div class="section page-break" id="state-management">
+    <h1>Gestion d'Etat</h1>
+
+    <h2>Zustand Stores</h2>
+    <p>L'application utilise Zustand pour la gestion d'etat avec persistance localStorage.</p>
+
+    {{STORES}}
+  </div>
+
+  <!-- Data Flow Section -->
+  <div class="section page-break" id="data-flow">
+    <h1>Flux de Donnees</h1>
+
+    <h2>Pattern utilise</h2>
+    <pre><code>┌─────────────────┐
+│   Components    │
+└────────┬────────┘
+         │ useStore()
+         ▼
+┌─────────────────┐
+│  Zustand Store  │
+└────────┬────────┘
+         │ persist()
+         ▼
+┌─────────────────┐
+│  localStorage   │
+└─────────────────┘</code></pre>
+
+    <h2>Bonnes pratiques</h2>
+    <ul>
+      <li>Utiliser des selectors pour eviter les re-renders inutiles</li>
+      <li>Separer l'etat par domaine (auth, participants, preferences...)</li>
+      <li>Persister uniquement les donnees necessaires</li>
+    </ul>
+  </div>
+
+</body>
+</html>

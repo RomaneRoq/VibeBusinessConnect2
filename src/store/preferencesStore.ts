@@ -4,7 +4,6 @@ import type { Preference } from '@/types'
 
 interface PreferencesState {
   preferences: Preference[]
-  maxPreferences: number
   deadline: string
   isSubmitted: boolean
 
@@ -15,22 +14,20 @@ interface PreferencesState {
   isInPreferences: (participantId: string) => boolean
   canAddMore: () => boolean
   submitPreferences: () => void
-  getRemainingCount: () => number
+  unsubmitPreferences: () => void
 }
 
 export const usePreferencesStore = create<PreferencesState>()(
   persist(
     (set, get) => ({
       preferences: [],
-      maxPreferences: 10,
       deadline: '2025-02-24T18:00:00Z',
       isSubmitted: false,
 
       addPreference: (participantId: string) => {
-        const { preferences, maxPreferences, isSubmitted } = get()
+        const { preferences } = get()
 
-        if (isSubmitted) return false
-        if (preferences.length >= maxPreferences) return false
+        // Pas de doublon
         if (preferences.some(p => p.participantId === participantId)) return false
 
         set({
@@ -47,9 +44,6 @@ export const usePreferencesStore = create<PreferencesState>()(
       },
 
       removePreference: (participantId: string) => {
-        const { isSubmitted } = get()
-        if (isSubmitted) return
-
         set(state => {
           const filtered = state.preferences.filter(p => p.participantId !== participantId)
           // Reorder remaining preferences
@@ -63,9 +57,6 @@ export const usePreferencesStore = create<PreferencesState>()(
       },
 
       reorderPreferences: (newOrder: Preference[]) => {
-        const { isSubmitted } = get()
-        if (isSubmitted) return
-
         set({
           preferences: newOrder.map((p, index) => ({
             ...p,
@@ -79,17 +70,17 @@ export const usePreferencesStore = create<PreferencesState>()(
       },
 
       canAddMore: () => {
-        const { preferences, maxPreferences, isSubmitted } = get()
-        return !isSubmitted && preferences.length < maxPreferences
+        // Plus de limite - on peut toujours ajouter
+        return true
       },
 
       submitPreferences: () => {
         set({ isSubmitted: true })
       },
 
-      getRemainingCount: () => {
-        const { preferences, maxPreferences } = get()
-        return maxPreferences - preferences.length
+      unsubmitPreferences: () => {
+        // Permet de modifier après soumission
+        set({ isSubmitted: false })
       }
     }),
     {

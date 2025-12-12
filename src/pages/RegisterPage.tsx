@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Loader2, Rocket, Building2, Mail, Lock, Briefcase, ArrowRight, ArrowLeft, Check, Home, X } from 'lucide-react'
+import { Loader2, Rocket, Building2, Mail, Lock, Briefcase, ArrowRight, ArrowLeft, Check, Home, X, Eye, EyeOff } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -25,6 +25,8 @@ export default function RegisterPage() {
     isVillageNetwork: false
   })
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const validatePassword = (password: string): boolean => {
     const hasMinLength = password.length >= 8
@@ -253,12 +255,19 @@ export default function RegisterPage() {
                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="password"
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       placeholder="••••••••"
                       value={formData.password}
                       onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                      className="pl-11"
+                      className="pl-11 pr-11"
                     />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
                   </div>
                   <p className="text-xs text-muted-foreground">
                     Min. 8 caractères, 1 majuscule, 1 chiffre
@@ -271,13 +280,52 @@ export default function RegisterPage() {
                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="confirmPassword"
-                      type="password"
+                      type={showConfirmPassword ? "text" : "password"}
                       placeholder="••••••••"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="pl-11"
+                      className={cn(
+                        "pl-11 pr-20",
+                        confirmPassword && (formData.password === confirmPassword
+                          ? "border-green-500 focus-visible:ring-green-500"
+                          : "border-red-500 focus-visible:ring-red-500")
+                      )}
                     />
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        className="text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                      {confirmPassword && (
+                        <div className={cn(
+                          "w-5 h-5 rounded-full flex items-center justify-center",
+                          formData.password === confirmPassword
+                            ? "bg-green-500"
+                            : "bg-red-500"
+                        )}>
+                          {formData.password === confirmPassword
+                            ? <Check className="h-3 w-3 text-white" />
+                            : <X className="h-3 w-3 text-white" />
+                          }
+                        </div>
+                      )}
+                    </div>
                   </div>
+                  {confirmPassword && formData.password !== confirmPassword && (
+                    <p className="text-xs text-red-500 flex items-center gap-1">
+                      <X className="h-3 w-3" />
+                      Les mots de passe ne correspondent pas
+                    </p>
+                  )}
+                  {confirmPassword && formData.password === confirmPassword && (
+                    <p className="text-xs text-green-500 flex items-center gap-1">
+                      <Check className="h-3 w-3" />
+                      Les mots de passe correspondent
+                    </p>
+                  )}
                 </div>
               </div>
             )}

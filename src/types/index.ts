@@ -17,6 +17,7 @@ export type Sector =
 export type StartupStage =
   | 'idea'
   | 'mvp'
+  | 'bootstrap'
   | 'seed'
   | 'series_a'
   | 'series_b'
@@ -184,6 +185,7 @@ export const SECTOR_LABELS: SectorLabel = {
 export const STAGE_LABELS: StageLabel = {
   idea: 'Idée',
   mvp: 'MVP',
+  bootstrap: 'Bootstrap',
   seed: 'Seed',
   series_a: 'Série A',
   series_b: 'Série B',

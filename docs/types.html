@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>BusinessConnect - Documentation</title><style>
+    :root { --primary: #1E3A5F; --accent: #2980B9; --success: #10B981; --error: #EF4444; --text: #1a1a2e; --text-muted: #64748b; --border: #e2e8f0; --bg-code: #f8fafc; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 11pt; line-height: 1.6; color: var(--text); max-width: 900px; margin: 0 auto; padding: 20px; }
+    .print-notice { background: var(--accent); color: white; padding: 12px 20px; border-radius: 8px; margin-bottom: 24px; text-align: center; }
+    @media print { .print-notice { display: none; } body { max-width: none; padding: 0; } }
+    .cover-page { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; margin: -20px -20px 40px -20px; padding: 60px 40px; page-break-after: always; }
+    .cover-page h1 { font-size: 36pt; font-weight: 700; margin-bottom: 16px; border: none; }
+    .cover-page .subtitle { font-size: 18pt; opacity: 0.9; margin-bottom: 48px; }
+    .cover-page .meta { font-size: 12pt; opacity: 0.8; }
+    .toc { page-break-after: always; padding: 20px 0; }
+    .toc h2 { font-size: 24pt; color: var(--primary); margin-bottom: 24px; border-bottom: 2px solid var(--accent); padding-bottom: 8px; }
+    .toc-item { padding: 8px 0; border-bottom: 1px dotted var(--border); }
+    .toc-item a { color: var(--text); text-decoration: none; }
+    .toc-item.level-2 { padding-left: 24px; font-size: 10pt; }
+    h1 { font-size: 24pt; color: var(--primary); margin: 40px 0 16px 0; border-bottom: 3px solid var(--accent); padding-bottom: 8px; page-break-after: avoid; }
+    h2 { font-size: 18pt; color: var(--primary); margin: 32px 0 12px 0; page-break-after: avoid; }
+    h3 { font-size: 14pt; color: var(--accent); margin: 24px 0 8px 0; }
+    h4 { font-size: 12pt; color: var(--text); margin: 16px 0 8px 0; }
+    p { margin-bottom: 12px; }
+    pre { background: var(--bg-code); border: 1px solid var(--border); border-radius: 8px; padding: 16px; overflow-x: auto; font-family: 'Consolas', monospace; font-size: 9pt; line-height: 1.5; margin: 16px 0; }
+    code { font-family: 'Consolas', monospace; background: var(--bg-code); padding: 2px 6px; border-radius: 4px; font-size: 9pt; }
+    pre code { background: none; padding: 0; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 10pt; }
+    th { background: var(--primary); color: white; padding: 12px; text-align: left; font-weight: 600; }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:nth-child(even) { background: #f8fafc; }
+    .component-card { border: 1px solid var(--border); border-radius: 12px; margin: 24px 0; overflow: hidden; page-break-inside: avoid; }
+    .component-header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; padding: 16px 20px; }
+    .component-header h3 { color: white; margin: 0; font-size: 14pt; }
+    .component-header .file-path { font-size: 9pt; opacity: 0.8; margin-top: 4px; font-family: monospace; }
+    .component-body { padding: 20px; }
+    .badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 8pt; font-weight: 600; text-transform: uppercase; margin-right: 4px; }
+    .badge-required { background: var(--error); color: white; }
+    .badge-optional { background: var(--border); color: var(--text-muted); }
+    .badge-type { background: var(--accent); color: white; }
+    .badge-persist { background: var(--success); color: white; }
+    ul, ol { margin: 12px 0; padding-left: 24px; }
+    li { margin-bottom: 6px; }
+    .page-break { page-break-after: always; }
+    @media print { .page-break { page-break-after: always; } .component-card { page-break-inside: avoid; } h1, h2, h3 { page-break-after: avoid; } }
+  </style></head><body>
+    <div class="print-notice">Pour imprimer en PDF: Ctrl+P (Windows/Linux) ou Cmd+P (Mac)</div>
+    <div class="cover-page"><h1>BusinessConnect</h1><div class="subtitle">Documentation des Types</div><div class="meta">Genere le 12 décembre 2025</div></div>
+    <div class="toc"><h2>Table des matieres</h2><div class="toc-item"><a href="#types">Types et Interfaces</a></div>
+      <div class="toc-item level-2"><a href="#interfaces">Interfaces (10)</a></div>
+      <div class="toc-item level-2"><a href="#typealiases">Types (0)</a></div>
+      <div class="toc-item level-2"><a href="#constants">Constantes (2)</a></div></div>
+    <h1 id="types">Types et Interfaces</h1><p>Reference des 12 definitions TypeScript.</p>
+      <h2 id="interfaces">Interfaces</h2><div class="component-card"><div class="component-header"><h3>Participant</h3><div class="file-path"><span class="badge badge-type">Interface</span></div></div><div class="component-body">
+    <table><thead><tr><th>Propriete</th><th>Type</th><th>Statut</th></tr></thead><tbody>
+      <tr><td><code>id</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>type</code></td><td><code>ParticipantType</code></td><td>Requis</td></tr><tr><td><code>name</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>logo</code></td><td><code>string</code></td><td>Optionnel</td></tr><tr><td><code>sector</code></td><td><code>Sector</code></td><td>Requis</td></tr><tr><td><code>pitch</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>description</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>website</code></td><td><code>string</code></td><td>Optionnel</td></tr><tr><td><code>linkedIn</code></td><td><code>string</code></td><td>Optionnel</td></tr><tr><td><code>twitter</code></td><td><code>string</code></td><td>Optionnel</td></tr><tr><td><code>email</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>stage</code></td><td><code>StartupStage</code></td><td>Optionnel</td></tr><tr><td><code>fundingRaised</code></td><td><code>string</code></td><td>Optionnel</td></tr><tr><td><code>teamSize</code></td><td><code>number</code></td><td>Optionnel</td></tr><tr><td><code>foundedYear</code></td><td><code>number</code></td><td>Optionnel</td></tr><tr><td><code>isVillageNetwork</code></td><td><code>boolean</code></td><td>Optionnel</td></tr><tr><td><code>employeeCount</code></td><td><code>string</code></td><td>Optionnel</td></tr><tr><td><code>annualRevenue</code></td><td><code>string</code></td><td>Optionnel</td></tr><tr><td><code>innovationBudget</code></td><td><code>string</code></td><td>Optionnel</td></tr><tr><td><code>resources</code></td><td><code>string[]</code></td><td>Optionnel</td></tr><tr><td><code>lookingFor</code></td><td><code>PartnershipType[]</code></td><td>Requis</td></tr><tr><td><code>thematicsInterest</code></td><td><code>string[]</code></td><td>Requis</td></tr><tr><td><code>createdAt</code></td><td><code>string</code></td><td>Requis</td></tr>
+    </tbody></table>
+  </div></div><div class="component-card"><div class="component-header"><h3>User</h3><div class="file-path"><span class="badge badge-type">Interface</span></div></div><div class="component-body">
+    <table><thead><tr><th>Propriete</th><th>Type</th><th>Statut</th></tr></thead><tbody>
+      <tr><td><code>id</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>email</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>participantId</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>participant</code></td><td><code>Participant</code></td><td>Requis</td></tr><tr><td><code>onboardingCompleted</code></td><td><code>boolean</code></td><td>Requis</td></tr><tr><td><code>createdAt</code></td><td><code>string</code></td><td>Requis</td></tr>
+    </tbody></table>
+  </div></div><div class="component-card"><div class="component-header"><h3>Meeting</h3><div class="file-path"><span class="badge badge-type">Interface</span></div></div><div class="component-body">
+    <table><thead><tr><th>Propriete</th><th>Type</th><th>Statut</th></tr></thead><tbody>
+      <tr><td><code>id</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>startTime</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>endTime</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>participantId</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>participant</code></td><td><code>Participant</code></td><td>Requis</td></tr><tr><td><code>table</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>notes</code></td><td><code>string</code></td><td>Optionnel</td></tr><tr><td><code>status</code></td><td><code>'scheduled' | 'completed' | 'cancelled'</code></td><td>Requis</td></tr>
+    </tbody></table>
+  </div></div><div class="component-card"><div class="component-header"><h3>TimeSlot</h3><div class="file-path"><span class="badge badge-type">Interface</span></div></div><div class="component-body">
+    <table><thead><tr><th>Propriete</th><th>Type</th><th>Statut</th></tr></thead><tbody>
+      <tr><td><code>id</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>startTime</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>endTime</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>type</code></td><td><code>'meeting' | 'break' | 'free' | 'keynote'</code></td><td>Requis</td></tr><tr><td><code>meeting</code></td><td><code>Meeting</code></td><td>Optionnel</td></tr><tr><td><code>label</code></td><td><code>string</code></td><td>Optionnel</td></tr>
+    </tbody></table>
+  </div></div><div class="component-card"><div class="component-header"><h3>Message</h3><div class="file-path"><span class="badge badge-type">Interface</span></div></div><div class="component-body">
+    <table><thead><tr><th>Propriete</th><th>Type</th><th>Statut</th></tr></thead><tbody>
+      <tr><td><code>id</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>conversationId</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>senderId</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>receiverId</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>content</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>createdAt</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>read</code></td><td><code>boolean</code></td><td>Requis</td></tr>
+    </tbody></table>
+  </div></div><div class="component-card"><div class="component-header"><h3>Conversation</h3><div class="file-path"><span class="badge badge-type">Interface</span></div></div><div class="component-body">
+    <table><thead><tr><th>Propriete</th><th>Type</th><th>Statut</th></tr></thead><tbody>
+      <tr><td><code>id</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>participantId</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>participant</code></td><td><code>Participant</code></td><td>Requis</td></tr><tr><td><code>lastMessage</code></td><td><code>Message</code></td><td>Optionnel</td></tr><tr><td><code>unreadCount</code></td><td><code>number</code></td><td>Requis</td></tr><tr><td><code>createdAt</code></td><td><code>string</code></td><td>Requis</td></tr>
+    </tbody></table>
+  </div></div><div class="component-card"><div class="component-header"><h3>EventInfo</h3><div class="file-path"><span class="badge badge-type">Interface</span></div></div><div class="component-body">
+    <table><thead><tr><th>Propriete</th><th>Type</th><th>Statut</th></tr></thead><tbody>
+      <tr><td><code>id</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>name</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>date</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>startTime</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>endTime</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>location</code></td><td><code>{</code></td><td>Requis</td></tr><tr><td><code>name</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>address</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>city</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>country</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>coordinates</code></td><td><code>{</code></td><td>Optionnel</td></tr><tr><td><code>lat</code></td><td><code>number</code></td><td>Requis</td></tr><tr><td><code>lng</code></td><td><code>number</code></td><td>Requis</td></tr>
+    </tbody></table>
+  </div></div><div class="component-card"><div class="component-header"><h3>ProgramItem</h3><div class="file-path"><span class="badge badge-type">Interface</span></div></div><div class="component-body">
+    <table><thead><tr><th>Propriete</th><th>Type</th><th>Statut</th></tr></thead><tbody>
+      <tr><td><code>id</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>startTime</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>endTime</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>title</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>description</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>type</code></td><td><code>'keynote' | 'networking' | 'break' | 'speed_meeting' | 'workshop'</code></td><td>Requis</td></tr><tr><td><code>speaker</code></td><td><code>string</code></td><td>Optionnel</td></tr><tr><td><code>location</code></td><td><code>string</code></td><td>Optionnel</td></tr>
+    </tbody></table>
+  </div></div><div class="component-card"><div class="component-header"><h3>ChatbotResponse</h3><div class="file-path"><span class="badge badge-type">Interface</span></div></div><div class="component-body">
+    <table><thead><tr><th>Propriete</th><th>Type</th><th>Statut</th></tr></thead><tbody>
+      <tr><td><code>keywords</code></td><td><code>string[]</code></td><td>Requis</td></tr><tr><td><code>response</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>followUp</code></td><td><code>string</code></td><td>Optionnel</td></tr>
+    </tbody></table>
+  </div></div><div class="component-card"><div class="component-header"><h3>Preference</h3><div class="file-path"><span class="badge badge-type">Interface</span></div></div><div class="component-body">
+    <table><thead><tr><th>Propriete</th><th>Type</th><th>Statut</th></tr></thead><tbody>
+      <tr><td><code>participantId</code></td><td><code>string</code></td><td>Requis</td></tr><tr><td><code>order</code></td><td><code>number</code></td><td>Requis</td></tr>
+    </tbody></table>
+  </div></div>
+      <h2 id="typealiases">Types</h2>
+      <h2 id="constants">Constantes</h2><div class="component-card"><div class="component-header"><h3>SECTOR_LABELS</h3><div class="file-path"><span class="badge badge-type">Const</span></div></div><div class="component-body">
+    <table><thead><tr><th>Propriete</th><th>Type</th><th>Statut</th></tr></thead><tbody>
+      <tr><td><code>fintech</code></td><td><code>'Fintech'</code></td><td>Requis</td></tr><tr><td><code>regtech</code></td><td><code>'Regtech'</code></td><td>Requis</td></tr><tr><td><code>insurtech</code></td><td><code>'Insurtech'</code></td><td>Requis</td></tr><tr><td><code>blockchain</code></td><td><code>'Blockchain'</code></td><td>Requis</td></tr><tr><td><code>cybersecurity</code></td><td><code>'Cybersécurité'</code></td><td>Requis</td></tr><tr><td><code>ai_ml</code></td><td><code>'IA &amp; Machine Learning'</code></td><td>Requis</td></tr><tr><td><code>payments</code></td><td><code>'Paiements'</code></td><td>Requis</td></tr><tr><td><code>banking</code></td><td><code>'Banque'</code></td><td>Requis</td></tr><tr><td><code>compliance</code></td><td><code>'Conformité'</code></td><td>Requis</td></tr><tr><td><code>data_analytics</code></td><td><code>'Data Analytics'</code></td><td>Requis</td></tr>
+    </tbody></table>
+  </div></div><div class="component-card"><div class="component-header"><h3>STAGE_LABELS</h3><div class="file-path"><span class="badge badge-type">Const</span></div></div><div class="component-body">
+    <table><thead><tr><th>Propriete</th><th>Type</th><th>Statut</th></tr></thead><tbody>
+      <tr><td><code>idea</code></td><td><code>'Idée'</code></td><td>Requis</td></tr><tr><td><code>mvp</code></td><td><code>'MVP'</code></td><td>Requis</td></tr><tr><td><code>bootstrap</code></td><td><code>'Bootstrap'</code></td><td>Requis</td></tr><tr><td><code>seed</code></td><td><code>'Seed'</code></td><td>Requis</td></tr><tr><td><code>series_a</code></td><td><code>'Série A'</code></td><td>Requis</td></tr><tr><td><code>series_b</code></td><td><code>'Série B'</code></td><td>Requis</td></tr><tr><td><code>scale_up</code></td><td><code>'Scale-up'</code></td><td>Requis</td></tr>
+    </tbody></table>
+  </div></div>
+      <div class="page-break"></div>
+  </body></html>

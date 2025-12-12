@@ -103,13 +103,12 @@ function SortableItem({ id, preference, onRemove }: {
 export default function Preferences() {
   const {
     preferences,
-    maxPreferences,
     deadline,
     isSubmitted,
     reorderPreferences,
     removePreference,
     submitPreferences,
-    getRemainingCount
+    unsubmitPreferences
   } = usePreferencesStore()
 
   const sensors = useSensors(
@@ -140,7 +139,14 @@ export default function Preferences() {
 
   const deadlineDate = new Date(deadline)
   const isDeadlinePassed = new Date() > deadlineDate
-  const remainingCount = getRemainingCount()
+
+  const handleModify = () => {
+    unsubmitPreferences()
+    toast({
+      title: 'Modification activée',
+      description: 'Vous pouvez maintenant modifier vos préférences.',
+    })
+  }
 
   return (
     <div className="space-y-6">
@@ -148,7 +154,7 @@ export default function Preferences() {
       <div>
         <h1 className="text-2xl font-bold">Mes préférences</h1>
         <p className="text-muted-foreground">
-          Sélectionnez jusqu'à 10 participants que vous souhaitez rencontrer
+          Sélectionnez les participants que vous souhaitez rencontrer
         </p>
       </div>
 
@@ -160,7 +166,7 @@ export default function Preferences() {
               <Heart className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold">{preferences.length}/{maxPreferences}</p>
+              <p className="text-2xl font-bold">{preferences.length}</p>
               <p className="text-sm text-muted-foreground">Préférences</p>
             </div>
           </CardContent>
@@ -251,17 +257,24 @@ export default function Preferences() {
       </Card>
 
       {/* Submit button */}
-      {preferences.length > 0 && !isSubmitted && (
+      {preferences.length > 0 && (
         <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-muted p-4 rounded-lg">
           <div>
-            <p className="font-medium">
-              {remainingCount > 0
-                ? `Vous pouvez encore ajouter ${remainingCount} préférence${remainingCount > 1 ? 's' : ''}`
-                : 'Vous avez atteint le maximum de préférences'}
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Soumettez vos choix avant la date limite
-            </p>
+            {isSubmitted ? (
+              <>
+                <p className="font-medium text-success">Vos préférences ont été soumises</p>
+                <p className="text-sm text-muted-foreground">
+                  Vous pouvez toujours les modifier si nécessaire
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="font-medium">Prêt à soumettre vos préférences ?</p>
+                <p className="text-sm text-muted-foreground">
+                  Soumettez vos choix avant la date limite
+                </p>
+              </>
+            )}
           </div>
           <div className="flex gap-2">
             <Link to="/participants">
@@ -269,9 +282,15 @@ export default function Preferences() {
                 Ajouter des participants
               </Button>
             </Link>
-            <Button onClick={handleSubmit} disabled={isDeadlinePassed}>
-              Soumettre mes préférences
-            </Button>
+            {isSubmitted ? (
+              <Button variant="secondary" onClick={handleModify}>
+                Modifier mes préférences
+              </Button>
+            ) : (
+              <Button onClick={handleSubmit} disabled={isDeadlinePassed}>
+                Soumettre mes préférences
+              </Button>
+            )}
           </div>
         </div>
       )}

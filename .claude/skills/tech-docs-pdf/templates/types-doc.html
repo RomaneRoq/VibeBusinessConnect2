@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{PROJECT_NAME}} - Documentation des Types</title>
+  <style>{{BASE_STYLES}}</style>
+</head>
+<body>
+  <!-- Cover Page -->
+  <div class="cover-page">
+    <h1>{{PROJECT_NAME}}</h1>
+    <div class="subtitle">Documentation des Types TypeScript</div>
+    <div class="meta">Genere le {{DATE}}</div>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h2>Table des matieres</h2>
+    {{TOC_ITEMS}}
+  </div>
+
+  <!-- Overview Section -->
+  <div class="section" id="overview">
+    <h1>Vue d'ensemble</h1>
+    <p>Reference complete des types TypeScript du projet {{PROJECT_NAME}}.</p>
+
+    <h2>Organisation</h2>
+    <p>Les types sont organises dans le repertoire <code>/src/types/</code> et exportes depuis <code>index.ts</code>.</p>
+
+    <h2>Categories</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Categorie</th>
+          <th>Description</th>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Interfaces</strong></td>
+          <td>Structures de donnees principales</td>
+          <td>{{INTERFACE_COUNT}}</td>
+        </tr>
+        <tr>
+          <td><strong>Types</strong></td>
+          <td>Alias de types et unions</td>
+          <td>{{TYPE_COUNT}}</td>
+        </tr>
+        <tr>
+          <td><strong>Enums</strong></td>
+          <td>Enumerations</td>
+          <td>{{ENUM_COUNT}}</td>
+        </tr>
+        <tr>
+          <td><strong>Constants</strong></td>
+          <td>Objets de configuration</td>
+          <td>{{CONST_COUNT}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Interfaces Section -->
+  <div class="section page-break" id="interfaces">
+    <h1>Interfaces</h1>
+    <p>Interfaces TypeScript definissant les structures de donnees du projet.</p>
+
+    {{INTERFACES}}
+  </div>
+
+  <!-- Types Section -->
+  <div class="section page-break" id="types">
+    <h1>Types</h1>
+    <p>Alias de types et types union.</p>
+
+    {{TYPES}}
+  </div>
+
+  <!-- Enums Section -->
+  <div class="section page-break" id="enums">
+    <h1>Enumerations</h1>
+    <p>Enumerations TypeScript.</p>
+
+    {{ENUMS}}
+  </div>
+
+  <!-- Constants Section -->
+  <div class="section page-break" id="constants">
+    <h1>Constantes</h1>
+    <p>Objets de configuration et labels.</p>
+
+    {{CONSTANTS}}
+  </div>
+
+</body>
+</html>

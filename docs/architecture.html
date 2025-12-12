@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>BusinessConnect - Documentation</title><style>
+    :root { --primary: #1E3A5F; --accent: #2980B9; --success: #10B981; --error: #EF4444; --text: #1a1a2e; --text-muted: #64748b; --border: #e2e8f0; --bg-code: #f8fafc; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 11pt; line-height: 1.6; color: var(--text); max-width: 900px; margin: 0 auto; padding: 20px; }
+    .print-notice { background: var(--accent); color: white; padding: 12px 20px; border-radius: 8px; margin-bottom: 24px; text-align: center; }
+    @media print { .print-notice { display: none; } body { max-width: none; padding: 0; } }
+    .cover-page { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; margin: -20px -20px 40px -20px; padding: 60px 40px; page-break-after: always; }
+    .cover-page h1 { font-size: 36pt; font-weight: 700; margin-bottom: 16px; border: none; }
+    .cover-page .subtitle { font-size: 18pt; opacity: 0.9; margin-bottom: 48px; }
+    .cover-page .meta { font-size: 12pt; opacity: 0.8; }
+    .toc { page-break-after: always; padding: 20px 0; }
+    .toc h2 { font-size: 24pt; color: var(--primary); margin-bottom: 24px; border-bottom: 2px solid var(--accent); padding-bottom: 8px; }
+    .toc-item { padding: 8px 0; border-bottom: 1px dotted var(--border); }
+    .toc-item a { color: var(--text); text-decoration: none; }
+    .toc-item.level-2 { padding-left: 24px; font-size: 10pt; }
+    h1 { font-size: 24pt; color: var(--primary); margin: 40px 0 16px 0; border-bottom: 3px solid var(--accent); padding-bottom: 8px; page-break-after: avoid; }
+    h2 { font-size: 18pt; color: var(--primary); margin: 32px 0 12px 0; page-break-after: avoid; }
+    h3 { font-size: 14pt; color: var(--accent); margin: 24px 0 8px 0; }
+    h4 { font-size: 12pt; color: var(--text); margin: 16px 0 8px 0; }
+    p { margin-bottom: 12px; }
+    pre { background: var(--bg-code); border: 1px solid var(--border); border-radius: 8px; padding: 16px; overflow-x: auto; font-family: 'Consolas', monospace; font-size: 9pt; line-height: 1.5; margin: 16px 0; }
+    code { font-family: 'Consolas', monospace; background: var(--bg-code); padding: 2px 6px; border-radius: 4px; font-size: 9pt; }
+    pre code { background: none; padding: 0; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 10pt; }
+    th { background: var(--primary); color: white; padding: 12px; text-align: left; font-weight: 600; }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:nth-child(even) { background: #f8fafc; }
+    .component-card { border: 1px solid var(--border); border-radius: 12px; margin: 24px 0; overflow: hidden; page-break-inside: avoid; }
+    .component-header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; padding: 16px 20px; }
+    .component-header h3 { color: white; margin: 0; font-size: 14pt; }
+    .component-header .file-path { font-size: 9pt; opacity: 0.8; margin-top: 4px; font-family: monospace; }
+    .component-body { padding: 20px; }
+    .badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 8pt; font-weight: 600; text-transform: uppercase; margin-right: 4px; }
+    .badge-required { background: var(--error); color: white; }
+    .badge-optional { background: var(--border); color: var(--text-muted); }
+    .badge-type { background: var(--accent); color: white; }
+    .badge-persist { background: var(--success); color: white; }
+    ul, ol { margin: 12px 0; padding-left: 24px; }
+    li { margin-bottom: 6px; }
+    .page-break { page-break-after: always; }
+    @media print { .page-break { page-break-after: always; } .component-card { page-break-inside: avoid; } h1, h2, h3 { page-break-after: avoid; } }
+  </style></head><body>
+    <div class="print-notice">Pour imprimer en PDF: Ctrl+P (Windows/Linux) ou Cmd+P (Mac)</div>
+    <div class="cover-page"><h1>BusinessConnect</h1><div class="subtitle">Documentation d'Architecture</div><div class="meta">Genere le 12 décembre 2025</div></div>
+    <div class="toc"><h2>Table des matieres</h2><div class="toc-item"><a href="#arch">Architecture</a></div>
+      <div class="toc-item level-2"><a href="#tech">Stack Technique</a></div>
+      <div class="toc-item level-2"><a href="#dirs">Structure des Dossiers</a></div>
+      <div class="toc-item level-2"><a href="#stores">Gestion d'etat</a></div></div>
+    <h1 id="arch">Architecture</h1><p>Vue d'ensemble technique.</p>
+      <h2 id="tech">Stack Technique</h2>
+      <table><thead><tr><th>Categorie</th><th>Technologie</th></tr></thead><tbody>
+        <tr><td>Framework</td><td>React 18 + TypeScript</td></tr>
+        <tr><td>Build</td><td>Vite</td></tr>
+        <tr><td>Styling</td><td>TailwindCSS</td></tr>
+        <tr><td>UI</td><td>Shadcn/ui (Radix UI)</td></tr>
+        <tr><td>State</td><td>Zustand</td></tr>
+        <tr><td>Routing</td><td>React Router v6</td></tr>
+      </tbody></table>
+      <h2 id="dirs">Structure des Dossiers</h2>
+      <pre><code>src/
+├── components/
+│   ├── ui/           # Composants Shadcn/ui
+│   ├── shared/       # Composants metier
+│   └── layout/       # Layout components
+├── pages/            # Pages
+├── store/            # Stores Zustand
+├── hooks/            # Custom hooks
+├── types/            # Types TypeScript
+├── data/             # Donnees mockees
+└── App.tsx</code></pre>
+      <h2 id="stores">Gestion d'etat</h2><p>6 stores Zustand avec persistance.</p><div class="component-card"><div class="component-header"><h3>useAgendaStore</h3><div class="file-path">store/agendaStore.ts</div></div><div class="component-body">
+    <h4>Etat</h4>
+    <table><thead><tr><th>Propriete</th><th>Type</th></tr></thead><tbody><tr><td><code>meetings</code></td><td><code>Meeting[]</code></td></tr><tr><td><code>timeSlots</code></td><td><code>TimeSlot[]</code></td></tr><tr><td><code>selectedMeeting</code></td><td><code>Meeting | null</code></td></tr></tbody></table>
+    <h4>Actions</h4>
+    <table><thead><tr><th>Action</th><th>Parametres</th></tr></thead><tbody><tr><td><code>setSelectedMeeting</code></td><td><code>meeting: Meeting | null</code></td></tr><tr><td><code>getMeetingById</code></td><td><code>id: string</code></td></tr><tr><td><code>exportToICS</code></td><td><code>void</code></td></tr><tr><td><code>setSelectedMeeting</code></td><td><code>meeting</code></td></tr><tr><td><code>getMeetingById</code></td><td><code>id: string</code></td></tr><tr><td><code>exportToICS</code></td><td><code>void</code></td></tr></tbody></table>
+  </div></div><div class="component-card"><div class="component-header"><h3>useAuthStore</h3><div class="file-path">store/authStore.ts</div></div><div class="component-body">
+    <h4>Etat</h4>
+    <table><thead><tr><th>Propriete</th><th>Type</th></tr></thead><tbody><tr><td><code>user</code></td><td><code>User | null</code></td></tr><tr><td><code>isAuthenticated</code></td><td><code>boolean</code></td></tr><tr><td><code>isLoading</code></td><td><code>boolean</code></td></tr></tbody></table>
+    <h4>Actions</h4>
+    <table><thead><tr><th>Action</th><th>Parametres</th></tr></thead><tbody><tr><td><code>login</code></td><td><code>email: string, password: string</code></td></tr><tr><td><code>register</code></td><td><code>data: RegisterData</code></td></tr><tr><td><code>logout</code></td><td><code>void</code></td></tr><tr><td><code>updateProfile</code></td><td><code>data: Partial&lt;Participant&gt;</code></td></tr><tr><td><code>completeOnboarding</code></td><td><code>void</code></td></tr><tr><td><code>logout</code></td><td><code>void</code></td></tr><tr><td><code>updateProfile</code></td><td><code>data: Partial&lt;Participant&gt;</code></td></tr><tr><td><code>completeOnboarding</code></td><td><code>void</code></td></tr></tbody></table>
+  </div></div><div class="component-card"><div class="component-header"><h3>useChatbotStore</h3><div class="file-path">store/chatbotStore.ts</div></div><div class="component-body">
+    <h4>Etat</h4>
+    <table><thead><tr><th>Propriete</th><th>Type</th></tr></thead><tbody><tr><td><code>isOpen</code></td><td><code>boolean</code></td></tr><tr><td><code>messages</code></td><td><code>ChatMessage[]</code></td></tr></tbody></table>
+    <h4>Actions</h4>
+    <table><thead><tr><th>Action</th><th>Parametres</th></tr></thead><tbody><tr><td><code>toggleChat</code></td><td><code>void</code></td></tr><tr><td><code>openChat</code></td><td><code>void</code></td></tr><tr><td><code>closeChat</code></td><td><code>void</code></td></tr><tr><td><code>sendMessage</code></td><td><code>content: string</code></td></tr><tr><td><code>clearMessages</code></td><td><code>void</code></td></tr><tr><td><code>toggleChat</code></td><td><code>void</code></td></tr><tr><td><code>openChat</code></td><td><code>void</code></td></tr><tr><td><code>closeChat</code></td><td><code>void</code></td></tr><tr><td><code>sendMessage</code></td><td><code>content: string</code></td></tr><tr><td><code>clearMessages</code></td><td><code>void</code></td></tr></tbody></table>
+  </div></div><div class="component-card"><div class="component-header"><h3>useMessagesStore</h3><div class="file-path">store/messagesStore.ts</div></div><div class="component-body">
+    <h4>Etat</h4>
+    <table><thead><tr><th>Propriete</th><th>Type</th></tr></thead><tbody><tr><td><code>messages</code></td><td><code>Message[]</code></td></tr><tr><td><code>conversations</code></td><td><code>Conversation[]</code></td></tr><tr><td><code>activeConversationId</code></td><td><code>string | null</code></td></tr></tbody></table>
+    <h4>Actions</h4>
+    <table><thead><tr><th>Action</th><th>Parametres</th></tr></thead><tbody><tr><td><code>setActiveConversation</code></td><td><code>conversationId: string | null</code></td></tr><tr><td><code>getConversationMessages</code></td><td><code>conversationId: string</code></td></tr><tr><td><code>sendMessage</code></td><td><code>conversationId: string, content: string</code></td></tr><tr><td><code>markAsRead</code></td><td><code>conversationId: string</code></td></tr><tr><td><code>startConversation</code></td><td><code>participantId: string</code></td></tr><tr><td><code>getTotalUnreadCount</code></td><td><code>void</code></td></tr><tr><td><code>setActiveConversation</code></td><td><code>conversationId</code></td></tr><tr><td><code>getConversationMessages</code></td><td><code>conversationId: string</code></td></tr><tr><td><code>sendMessage</code></td><td><code>conversationId: string, content: string</code></td></tr><tr><td><code>markAsRead</code></td><td><code>conversationId: string</code></td></tr><tr><td><code>startConversation</code></td><td><code>participantId: string</code></td></tr><tr><td><code>getTotalUnreadCount</code></td><td><code>void</code></td></tr></tbody></table>
+  </div></div><div class="component-card"><div class="component-header"><h3>useParticipantsStore</h3><div class="file-path">store/participantsStore.ts</div></div><div class="component-body">
+    <h4>Etat</h4>
+    <table><thead><tr><th>Propriete</th><th>Type</th></tr></thead><tbody><tr><td><code>participants</code></td><td><code>Participant[]</code></td></tr><tr><td><code>favorites</code></td><td><code>string[]</code></td></tr><tr><td><code>filters</code></td><td><code>{</code></td></tr><tr><td><code>type</code></td><td><code>ParticipantType | 'all'</code></td></tr><tr><td><code>sector</code></td><td><code>Sector | 'all'</code></td></tr><tr><td><code>search</code></td><td><code>string</code></td></tr></tbody></table>
+    <h4>Actions</h4>
+    <table><thead><tr><th>Action</th><th>Parametres</th></tr></thead><tbody><tr><td><code>setFilter</code></td><td><code>key: keyof ParticipantsState['filters'], value: string</code></td></tr><tr><td><code>resetFilters</code></td><td><code>void</code></td></tr><tr><td><code>toggleFavorite</code></td><td><code>participantId: string</code></td></tr><tr><td><code>getParticipantById</code></td><td><code>id: string</code></td></tr><tr><td><code>getFilteredParticipants</code></td><td><code>void</code></td></tr><tr><td><code>setFilter</code></td><td><code>key, value</code></td></tr><tr><td><code>resetFilters</code></td><td><code>void</code></td></tr><tr><td><code>toggleFavorite</code></td><td><code>participantId: string</code></td></tr><tr><td><code>getParticipantById</code></td><td><code>id: string</code></td></tr><tr><td><code>getFilteredParticipants</code></td><td><code>void</code></td></tr><tr><td><code>partialize</code></td><td><code>state</code></td></tr></tbody></table>
+  </div></div><div class="component-card"><div class="component-header"><h3>usePreferencesStore</h3><div class="file-path">store/preferencesStore.ts</div></div><div class="component-body">
+    <h4>Etat</h4>
+    <table><thead><tr><th>Propriete</th><th>Type</th></tr></thead><tbody><tr><td><code>preferences</code></td><td><code>Preference[]</code></td></tr><tr><td><code>maxPreferences</code></td><td><code>number</code></td></tr><tr><td><code>deadline</code></td><td><code>string</code></td></tr><tr><td><code>isSubmitted</code></td><td><code>boolean</code></td></tr></tbody></table>
+    <h4>Actions</h4>
+    <table><thead><tr><th>Action</th><th>Parametres</th></tr></thead><tbody><tr><td><code>addPreference</code></td><td><code>participantId: string</code></td></tr><tr><td><code>removePreference</code></td><td><code>participantId: string</code></td></tr><tr><td><code>reorderPreferences</code></td><td><code>newOrder: Preference[]</code></td></tr><tr><td><code>isInPreferences</code></td><td><code>participantId: string</code></td></tr><tr><td><code>canAddMore</code></td><td><code>void</code></td></tr><tr><td><code>submitPreferences</code></td><td><code>void</code></td></tr><tr><td><code>getRemainingCount</code></td><td><code>void</code></td></tr><tr><td><code>addPreference</code></td><td><code>participantId: string</code></td></tr><tr><td><code>removePreference</code></td><td><code>participantId: string</code></td></tr><tr><td><code>reorderPreferences</code></td><td><code>newOrder: Preference[]</code></td></tr><tr><td><code>isInPreferences</code></td><td><code>participantId: string</code></td></tr><tr><td><code>canAddMore</code></td><td><code>void</code></td></tr><tr><td><code>submitPreferences</code></td><td><code>void</code></td></tr><tr><td><code>getRemainingCount</code></td><td><code>void</code></td></tr></tbody></table>
+  </div></div>
+      <div class="page-break"></div>
+  </body></html>
